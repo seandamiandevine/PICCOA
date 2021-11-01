@@ -19,15 +19,14 @@ for(id in unique(d$id)){
   choices = sub$response
   stim = sub$trialintensity
   
-  # Visualize real subject curve
-  layout(matrix(1:2,ncol=2))
-  stimbin = dplyr::ntile(sub$trialintensity, 20)
-  mResp = tapply(choices, list(stimbin, sub$timebin4), mean)
-  plot(mResp[,1], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main=paste0('Empirical\nid=',id), ylim=c(0,1))
-  lines(mResp[,4], type='b', col='blue')
-  axis(1, at=c(1,20), labels=c('Very Purple', 'Very Blue'))
-  legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 Trials', 'Last 200 Trials'))
-  
+  # # Visualize real subject curve
+  # stimbin = dplyr::ntile(sub$trialintensity, 20)
+  # mResp = tapply(choices, list(stimbin, sub$timebin4), mean)
+  # plot(mResp[,1], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main=paste0('Empirical\nid=',id), ylim=c(0,1))
+  # lines(mResp[,4], type='b', col='blue')
+  # axis(1, at=c(1,20), labels=c('Very Purple', 'Very Blue'))
+  # legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 Trials', 'Last 200 Trials'))
+
   bestCtlLL = 1e6
   bestCtlOpt = list()
   bestRTFLL = 1e6
@@ -93,7 +92,6 @@ for(id in unique(d$id)){
   CtlAIC = aic(-bestCtlLL, length(bestCtlOpt$par))
   RTFAIC = aic(-LLRTF, length(bestRTFOpt$par))
   RelativeLik = (CtlAIC-RTFAIC)/2
-  
   
   # Save
   models_sub = data.frame(
