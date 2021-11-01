@@ -1,5 +1,5 @@
 
-setwd('~/Desktop/Ongoing/PICCAgeing/Analysis&Data/Models/RTF')
+setwd('~/Documents/PICCOA/Models/RTF')
 source('models.R')
 
 # Dots --------------------------------------------------------------------

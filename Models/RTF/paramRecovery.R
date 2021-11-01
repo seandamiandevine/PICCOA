@@ -1,6 +1,6 @@
 
 set.seed(2021)
-setwd('~/Desktop/Ongoing/PICCAgeing/Analysis&Data/Models/RTF')
+setwd('~/Documents/PICCOA/Models/RTF')
 source('models.R')
 d = read.csv('clean_dots.csv')
 
@@ -17,6 +17,7 @@ for(id in unique(dsim$id)){
   cat('Simulating choices for id', match(id, unique(dsim$id)), '/', Nsub*2, '\n')
   stim = dsim[dsim$id==id, 'trialintensity']
   N = length(stim)
+  spectrum = min(stim):max(stim)
   
   # Control model
   tau = runif(1, 0.001, 100)
@@ -24,7 +25,7 @@ for(id in unique(dsim$id)){
   resps = c()
   probs = c()
   for(t in 1:N){
-    p = CDF(stim[t], tau, sigma)
+    p = CDF(stim[t], spectrum, tau, sigma)
     probs[t] = p
     resps[t] = Choice(p)
   }
@@ -41,17 +42,20 @@ for(id in unique(dsim$id)){
   # RTF Model
   tau = runif(1, 0.01, 100)
   sigma = runif(1, 0.01, 50)
-  nk = round(runif(1, 2, 10))
+  nk = sample(5:75, size=1)
   w = .5
   resps = c()
   probs = c()
   for(t in 1:N){
-    if(t <= nk) {
-      probs[t] = CDF(stim[t], tau, sigma) 
+    if(t <= 5) {
+      probs[t] = CDF(stim[t], spectrum, tau, sigma) 
       resps[t] = Choice(probs[t])
       next 
-    } 
-    thisRange = (t-nk):t
+    } else if(t < nk){
+      thisRange = 1:t
+    } else {
+      thisRange = (t-nk):t
+    }
     maxX = max(stim[thisRange])
     minX = min(stim[thisRange])
     idx = match(stim[t], stim[thisRange])
@@ -61,8 +65,10 @@ for(id in unique(dsim$id)){
     if(is.na(range)) range = 0
     freq = (rank-1)/(nk-1)
     y = w*range + (1-w)*freq
+    y = round(y*max(stim))
+    y = ifelse(y<min(stim), min(stim), ifelse(y>max(stim), max(stim), y))
     
-    p = CDF(y*100, tau, sigma)
+    p = CDF(y, spectrum, tau, sigma)
     probs[t] = p
     resps[t] = Choice(p)
   }
@@ -91,28 +97,28 @@ layout(matrix(1:4, 2,2, byrow=T))
 # Ctl model
 # Stable
 mProb = tapply(Ctl$probs, list(Ctl$stimbin, Ctl$timebin, Ctl$condition), mean)
-plot(mProb[,1,1], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='Control\nStable', ylim=c(0,1))
-lines(mProb[,4,1], type='b', col='blue')
+plot(mProb[,1,'Stable'], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='Control\nStable', ylim=c(0,1))
+lines(mProb[,4,'Stable'], type='b', col='blue')
 axis(1, at=c(1,20), labels=c('Very Purple', 'Very Blue'))
 legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 Trials', 'Last 200 Trials'))
 
 # Decreasing
-plot(mProb[,1,2], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='Control\nDecreasing', ylim=c(0,1))
-lines(mProb[,4,2], type='b', col='blue')
+plot(mProb[,1,'Decreasing'], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='Control\nDecreasing', ylim=c(0,1))
+lines(mProb[,4,'Decreasing'], type='b', col='blue')
 axis(1, at=c(1,20), labels=c('Very Purple', 'Very Blue'))
 #legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 Trials', 'Last 200 Trials'))
 
 # RF model
 # Stable
 mProb = tapply(RF$probs, list(RF$stimbin, RF$timebin, RF$condition), mean)
-plot(mProb[,1,1], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='RTF\nStable', ylim=c(0,1))
-lines(mProb[,4,1], type='b', col='blue')
+plot(mProb[,1,'Stable'], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='RTF\nStable', ylim=c(0,1))
+lines(mProb[,4,'Stable'], type='b', col='blue')
 axis(1, at=c(1,20), labels=c('Very Purple', 'Very Blue'))
 #legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 Trials', 'Last 200 Trials'))
 
 # Decreasing
-plot(mProb[,1,2], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='RTF\nDecreasing', ylim=c(0,1))
-lines(mProb[,4,2], type='b', col='blue')
+plot(mProb[,1,'Decreasing'], type='b', col='red', xaxt='n', ylab='p(Blue)', xlab='', main='RTF\nDecreasing', ylim=c(0,1))
+lines(mProb[,4,'Decreasing'], type='b', col='blue')
 axis(1, at=c(1,20), labels=c('Very Purple', 'Very Blue'))
 #legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 Trials', 'Last 200 Trials'))
 
@@ -200,7 +206,7 @@ for(id in unique(RF$id)) {
     while(1){
       tau0 = runif(1, 0.001, 100)
       sigma0 = runif(1, 0.001, 100)
-      nk0 = sample(1:10, size=1)
+      nk0 = sample(5:75, size=1)
       x0 = c(tau0, sigma0, nk0)
       if(obfunc(x0)!=1e6 & !is.na(obfunc(x0))) break
     }
@@ -219,14 +225,14 @@ for(id in unique(RF$id)) {
   est_tau = bestRTFOpt$par[1]
   est_sigma = bestRTFOpt$par[2]
   probs = c()
-  for(k in 1:10){
-    probs[k] = obfunc(c(est_tau, est_sigma, k))
+  grid = 5:75
+  for(k in grid){
+    probs= c(probs, obfunc(c(est_tau, est_sigma, k)))
   }
-  plot(1:10, probs, xlab='nk', ylab='LL', type='b') # check for convexity
   probs[is.na(probs)] = 1e6
-  est_nk = match(min(probs), probs)
+  plot(grid, probs, xlab='nk', ylab='LL', type='b') # check for convexity
+  est_nk = grid[match(min(probs), probs)]
   legend('topright', bty='n',legend=paste0('true=',true_nk,'\nest=',est_nk))
-  
   thisRecov = data.frame(id=id, true_tau=true_tau, true_sigma=true_sigma, true_nk=true_nk, 
                          est_tau=est_tau, est_sigma=est_sigma, est_nk=est_nk) 
   RecoveryRTF = rbind(RecoveryRTF, thisRecov)
