@@ -1,0 +1,30 @@
+$model
+
+Call:
+lm(formula = mrt ~ age_group * condition, data = tmp)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-6.294 -1.746 -0.367  1.055 12.303 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(>|t|)    
+(Intercept)           7.8771     0.2184  36.062  < 2e-16 ***
+age_group             1.1597     0.2184   5.309 3.73e-07 ***
+condition            -0.1334     0.2184  -0.611    0.542    
+age_group:condition   0.1200     0.2184   0.549    0.584    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 2.763 on 156 degrees of freedom
+Multiple R-squared:  0.1561,	Adjusted R-squared:  0.1399 
+F-statistic: 9.621 on 3 and 156 DF,  p-value: 7.257e-06
+
+
+$CI
+                         2.5 %    97.5 %
+(Intercept)          7.4456336 8.3085676
+age_group            0.7282716 1.5912056
+condition           -0.5648434 0.2980907
+age_group:condition -0.3115164 0.5514176
+

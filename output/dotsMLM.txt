@@ -1,0 +1,63 @@
+$model
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: response ~ age_groupc * conditionc * trial0 * colour0c + (trial0 |      id)
+   Data: d.dots
+Control: glmerControl(optimizer = "bobyqa")
+
+     AIC      BIC   logLik deviance df.resid 
+ 61060.0  61245.4 -30511.0  61022.0   127981 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-20252.5     -0.2      0.0      0.2    194.5 
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr 
+ id     (Intercept) 2.073    1.440         
+        trial0      3.380    1.838    -0.18
+Number of obs: 128000, groups:  id, 160
+
+Fixed effects:
+                                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                            1.013155   0.108059   9.376  < 2e-16 ***
+age_groupc                             0.109005   0.108057   1.009  0.31308    
+conditionc                            -0.506334   0.108042  -4.686 2.78e-06 ***
+trial0                                 3.092405   0.133872  23.100  < 2e-16 ***
+colour0c                              12.293979   0.129673  94.807  < 2e-16 ***
+age_groupc:conditionc                 -0.009118   0.108050  -0.084  0.93275    
+age_groupc:trial0                     -0.658040   0.133980  -4.911 9.04e-07 ***
+conditionc:trial0                      3.282755   0.133847  24.526  < 2e-16 ***
+age_groupc:colour0c                   -0.655145   0.128162  -5.112 3.19e-07 ***
+conditionc:colour0c                   -1.741063   0.128131 -13.588  < 2e-16 ***
+trial0:colour0c                       10.576359   0.215552  49.066  < 2e-16 ***
+age_groupc:conditionc:trial0          -0.333735   0.133962  -2.491  0.01273 *  
+age_groupc:conditionc:colour0c        -0.214962   0.128209  -1.677  0.09361 .  
+age_groupc:trial0:colour0c            -0.613293   0.214107  -2.864  0.00418 ** 
+conditionc:trial0:colour0c            10.407272   0.213488  48.749  < 2e-16 ***
+age_groupc:conditionc:trial0:colour0c -1.281009   0.213694  -5.995 2.04e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$CI
+                                           2.5 %      97.5 %
+.sig01                                        NA          NA
+.sig02                                        NA          NA
+.sig03                                        NA          NA
+(Intercept)                            0.8013635  1.22494654
+age_groupc                            -0.1027820  0.32079182
+conditionc                            -0.7180919 -0.29457554
+trial0                                 2.8300198  3.35479021
+colour0c                              12.0398237 12.54813435
+age_groupc:conditionc                 -0.2208924  0.20265719
+age_groupc:trial0                     -0.9206357 -0.39544383
+conditionc:trial0                      3.0204197  3.54509006
+age_groupc:colour0c                   -0.9063373 -0.40395266
+conditionc:colour0c                   -1.9921958 -1.48992985
+trial0:colour0c                       10.1538850 10.99883335
+age_groupc:conditionc:trial0          -0.5962953 -0.07117445
+age_groupc:conditionc:colour0c        -0.4662477  0.03632365
+age_groupc:trial0:colour0c            -1.0329358 -0.19364998
+conditionc:trial0:colour0c             9.9888438 10.82570093
+age_groupc:conditionc:trial0:colour0c -1.6998418 -0.86217554
+

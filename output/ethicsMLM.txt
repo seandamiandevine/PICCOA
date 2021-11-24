@@ -1,0 +1,63 @@
+$model
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: response ~ age_groupc * conditionc * trial0 * norm_mean0c + (trial0 |      id)
+   Data: d.ethics
+Control: glmerControl(optimizer = "bobyqa")
+
+     AIC      BIC   logLik deviance df.resid 
+ 27629.8  27792.4 -13795.9  27591.8    38381 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-40.836  -0.391  -0.154   0.289  21.259 
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr
+ id     (Intercept) 1.248    1.117        
+        trial0      2.931    1.712    0.01
+Number of obs: 38400, groups:  id, 160
+
+Fixed effects:
+                                         Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                               1.02784    0.09979  10.300  < 2e-16 ***
+age_groupc                                0.08860    0.09955   0.890 0.373435    
+conditionc                               -0.12533    0.09955  -1.259 0.208058    
+trial0                                    1.20593    0.17081   7.060 1.66e-12 ***
+norm_mean0c                              -7.38847    0.16971 -43.536  < 2e-16 ***
+age_groupc:conditionc                     0.06579    0.09956   0.661 0.508749    
+age_groupc:trial0                        -0.17891    0.17008  -1.052 0.292836    
+conditionc:trial0                         0.27038    0.17006   1.590 0.111860    
+age_groupc:norm_mean0c                   -0.16559    0.16237  -1.020 0.307819    
+conditionc:norm_mean0c                    0.04597    0.16266   0.283 0.777467    
+trial0:norm_mean0c                       -4.70475    0.36169 -13.008  < 2e-16 ***
+age_groupc:conditionc:trial0             -0.35981    0.17013  -2.115 0.034432 *  
+age_groupc:conditionc:norm_mean0c         0.45388    0.16295   2.785 0.005346 ** 
+age_groupc:trial0:norm_mean0c             0.79500    0.34464   2.307 0.021068 *  
+conditionc:trial0:norm_mean0c            -1.59501    0.34581  -4.612 3.98e-06 ***
+age_groupc:conditionc:trial0:norm_mean0c  1.21802    0.34588   3.522 0.000429 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+$CI
+                                               2.5 %      97.5 %
+.sig01                                            NA          NA
+.sig02                                            NA          NA
+.sig03                                            NA          NA
+(Intercept)                               0.83225654  1.22343068
+age_groupc                               -0.10650864  0.28371811
+conditionc                               -0.32044991  0.06979063
+trial0                                    0.87115247  1.54070908
+norm_mean0c                              -7.72109475 -7.05584493
+age_groupc:conditionc                    -0.12935169  0.26093338
+age_groupc:trial0                        -0.51226725  0.15444191
+conditionc:trial0                        -0.06293517  0.60369041
+age_groupc:norm_mean0c                   -0.48382762  0.15265344
+conditionc:norm_mean0c                   -0.27283617  0.36477847
+trial0:norm_mean0c                       -5.41364315 -3.99586324
+age_groupc:conditionc:trial0             -0.69325286 -0.02637157
+age_groupc:conditionc:norm_mean0c         0.13450712  0.77325031
+age_groupc:trial0:norm_mean0c             0.11952183  1.47048234
+conditionc:trial0:norm_mean0c            -2.27277977 -0.91723706
+age_groupc:conditionc:trial0:norm_mean0c  0.54011438  1.89591975
+
