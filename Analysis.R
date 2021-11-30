@@ -167,6 +167,7 @@ par(mar=c(5.1 ,6.1, 4.1, 2.1))
 tmp     = d.ethics[d.ethics$stimbin==median(unique(d.ethics$stimbin)),]
 diffs   = tapply(tmp$response, list(tmp$id, tmp$timebin, tmp$condition, tmp$age_group), mean)
 
+
 diffYS  = diffs[,5,'Stable','YA'] - diffs[,1,'Stable','YA']
 diffYD  = diffs[,5,'Decreasing','YA'] - diffs[,1,'Decreasing','YA']
 diffOS  = diffs[,5,'Stable','OA'] - diffs[,1,'Stable','OA']
@@ -179,6 +180,7 @@ mdiffs  = matrix(c(
   mean(diffOD, na.rm=T)), 
   2, 2, byrow=T,dimnames = list(c('Stable','Decreasing'), c('Young', 'Old')))*100
 
+
 sediffs  = matrix(c(
   plotrix::std.error(diffYS, na.rm=T), 
   plotrix::std.error(diffOS, na.rm=T), 
@@ -187,7 +189,7 @@ sediffs  = matrix(c(
   2, 2, byrow=T,dimnames = list(c('Stable','Decreasing'), c('Young', 'Old')))*10
 sediffs[is.na(sediffs)]=0
 
-thisbar = barplot(mdiffs, beside=T, xpd=F,col=c('orange','brown'),ylim=range(pretty(c(mdiffs-sediffs,mdiffs+sediffs))),
+thisbar = barplot(mdiffs, beside=T, xpd=F,col=c('orange','brown'),ylim=range(pretty(c(mdiffs-sediffs,mdiffs+sediffs+2))),
                   ylab = '% Change in Ethical Judgements\n(Last 48 Trials-First 48 Trials)',
                   main = 'Most Ambiguous Ethics Proposals',
                   legend.text = T, args.legend = list(x='topright',bty='n', title='Prevalence Condition'))

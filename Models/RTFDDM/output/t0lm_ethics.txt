@@ -1,0 +1,52 @@
+[[1]]
+
+Call:
+lm(formula = pars ~ age_group * condition, data = t0pars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.6450 -0.7821 -0.0972  0.6769  3.4484 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            2.641834   0.089611  29.481  < 2e-16 ***
+age_group1            -0.471682   0.089611  -5.264 4.61e-07 ***
+condition1            -0.061536   0.089611  -0.687    0.493    
+age_group1:condition1  0.007213   0.089611   0.080    0.936    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.134 on 156 degrees of freedom
+Multiple R-squared:  0.153,	Adjusted R-squared:  0.1367 
+F-statistic: 9.395 on 3 and 156 DF,  p-value: 9.583e-06
+
+
+$CI
+                           2.5 %     97.5 %
+(Intercept)            2.4648265  2.8188425
+age_group1            -0.6486903 -0.2946744
+condition1            -0.2385442  0.1154717
+age_group1:condition1 -0.1697951  0.1842208
+
+$d
+$d$age_group
+
+Cohen's d
+
+d estimate: -0.8362939 (large)
+95 percent confidence interval:
+     lower      upper 
+-1.1619481 -0.5106397 
+
+
+$d$cond
+
+Cohen's d
+
+d estimate: -0.1006926 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.4131799  0.2117947 
+
+
+

@@ -77,15 +77,40 @@ for(id in unique(dsim$id)){
 
 # RFDDM = read.csv('simulation_data.csv')
 
-pdf('plots/Simulations.pdf')
+pdf('plots/simulations1.pdf', width = 12, height=6 )
 
 # RFDDM model
-layout(matrix(1:4, 2, 2,byrow=T))
+# overall
+layout(matrix(1:2, 1, 2,byrow=T))
 
 RFDDM$trial = unlist(by(RFDDM$id, RFDDM$id, FUN = function(x) 1:length(x)))
 RFDDM$timebin = dplyr::ntile(RFDDM$trial, 4)
 RFDDM$stimbin = dplyr::ntile(RFDDM$stim, 10)
 RFDDM$abin = cut(RFDDM$true_a, 2, labels=c('Low', 'High'))
+
+mResp = tapply(RFDDM$choices, list(RFDDM$stimbin, RFDDM$timebin, RFDDM$condition), mean)
+
+# Stable
+plot(rownames(mResp), mResp[,1,'Stable'], type='b', ylab = 'p(Blue)', xlab='', xaxt='n', col='red', 
+     main = 'Stable Prevalence', ylim=c(0,1))
+axis(1, at=c(1,max(RFDDM$stimbin)), labels = c('Very Purple', 'Very Blue'))
+lines(rownames(mResp), mResp[,4,'Stable'], type='b', col='blue')
+legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 trials', 'Last 200 trials'))
+
+# Decreasing
+plot(rownames(mResp), mResp[,1,'Decreasing'], type='b', ylab = 'p(Blue)', xlab='', xaxt='n', col='red', 
+     main = 'Decreasing Prevalence', ylim=c(0,1))
+axis(1, at=c(1,max(RFDDM$stimbin)), labels = c('Very Purple', 'Very Blue'))
+lines(rownames(mResp), mResp[,4,'Decreasing'], type='b', col='blue')
+#legend('topleft', bty='n', lty=1, pch=1, col=c('red', 'blue'), legend=c('First 200 trials', 'Last 200 trials'))
+
+dev.off()
+
+# Per abin
+pdf('plots/simulations2.pdf', width = 8, height=6 )
+
+layout(matrix(1:4, 2, 2,byrow=T))
+
 mResp = tapply(RFDDM$choices, list(RFDDM$stimbin, RFDDM$timebin, RFDDM$condition, RFDDM$abin), mean)
 
 # Low

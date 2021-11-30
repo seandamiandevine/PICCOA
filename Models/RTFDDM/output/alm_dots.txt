@@ -28,3 +28,25 @@ age_group1            -0.6733725 -0.27531629
 condition1            -0.3362034  0.06185283
 age_group1:condition1 -0.1718355  0.22622071
 
+$d
+$d$age_group
+
+Cohen's d
+
+d estimate: -0.7445279 (medium)
+95 percent confidence interval:
+     lower      upper 
+-1.0674555 -0.4216003 
+
+
+$d$cond
+
+Cohen's d
+
+d estimate: -0.2026718 (small)
+95 percent confidence interval:
+     lower      upper 
+-0.5157620  0.1104183 
+
+
+

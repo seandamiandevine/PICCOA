@@ -10,9 +10,9 @@ Residuals:
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)    
 (Intercept)             52.925      2.221  23.825   <2e-16 ***
-age_group1               3.112      2.221   1.401    0.163    
+age_group1               3.113      2.221   1.401    0.163    
 condition1             -22.600      2.221 -10.174   <2e-16 ***
-age_group1:condition1   -2.287      2.221  -1.030    0.305    
+age_group1:condition1   -2.288      2.221  -1.030    0.305    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -22,9 +22,31 @@ F-statistic: 35.51 on 3 and 156 DF,  p-value: < 2.2e-16
 
 
 $CI
-                           2.5 %     97.5 %
-(Intercept)            48.537093  57.312907
-age_group1             -1.275407   7.500407
-condition1            -26.987907 -18.212093
-age_group1:condition1  -6.675407   2.100407
+                           2.5 %      97.5 %
+(Intercept)            1.6281723  2.02622851
+age_group1            -0.6733725 -0.27531629
+condition1            -0.3362034  0.06185283
+age_group1:condition1 -0.1718355  0.22622071
+
+$d
+$d$age_group
+
+Cohen's d
+
+d estimate: 0.1725131 (negligible)
+95 percent confidence interval:
+     lower      upper 
+-0.1403567  0.4853829 
+
+
+$d$cond
+
+Cohen's d
+
+d estimate: -1.603427 (large)
+95 percent confidence interval:
+    lower     upper 
+-1.962406 -1.244447 
+
+
 
