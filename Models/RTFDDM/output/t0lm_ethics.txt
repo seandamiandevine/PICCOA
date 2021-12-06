@@ -5,48 +5,48 @@ lm(formula = pars ~ age_group * condition, data = t0pars)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.6450 -0.7821 -0.0972  0.6769  3.4484 
+-2.7437 -0.7909 -0.1268  0.6476  8.0215 
 
 Coefficients:
-                       Estimate Std. Error t value Pr(>|t|)    
-(Intercept)            2.641834   0.089611  29.481  < 2e-16 ***
-age_group1            -0.471682   0.089611  -5.264 4.61e-07 ***
-condition1            -0.061536   0.089611  -0.687    0.493    
-age_group1:condition1  0.007213   0.089611   0.080    0.936    
+                      Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            2.37421    0.07731  30.712  < 2e-16 ***
+age_group1            -0.37766    0.07731  -4.885 1.64e-06 ***
+condition1            -0.01312    0.07731  -0.170    0.865    
+age_group1:condition1 -0.00492    0.07731  -0.064    0.949    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 1.134 on 156 degrees of freedom
-Multiple R-squared:  0.153,	Adjusted R-squared:  0.1367 
-F-statistic: 9.395 on 3 and 156 DF,  p-value: 9.583e-06
+Residual standard error: 1.383 on 316 degrees of freedom
+Multiple R-squared:  0.07031,	Adjusted R-squared:  0.06148 
+F-statistic: 7.966 on 3 and 316 DF,  p-value: 3.898e-05
 
 
 $CI
                            2.5 %     97.5 %
-(Intercept)            2.4648265  2.8188425
-age_group1            -0.6486903 -0.2946744
-condition1            -0.2385442  0.1154717
-age_group1:condition1 -0.1697951  0.1842208
+(Intercept)            2.2221146  2.5263132
+age_group1            -0.5297556 -0.2255570
+condition1            -0.1652244  0.1389743
+age_group1:condition1 -0.1570192  0.1471795
 
 $d
 $d$age_group
 
 Cohen's d
 
-d estimate: -0.8362939 (large)
+d estimate: -0.5478814 (medium)
 95 percent confidence interval:
      lower      upper 
--1.1619481 -0.5106397 
+-0.7719380 -0.3238248 
 
 
 $d$cond
 
 Cohen's d
 
-d estimate: -0.1006926 (negligible)
+d estimate: -0.0183612 (negligible)
 95 percent confidence interval:
      lower      upper 
--0.4131799  0.2117947 
+-0.2383337  0.2016112 
 
 
 

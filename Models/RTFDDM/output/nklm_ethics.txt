@@ -5,48 +5,48 @@ lm(formula = pars ~ age_group * condition, data = nkpars)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--34.150 -11.075  -0.912   9.419  48.750 
+-72.850 -11.100   6.225  17.113  33.325 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)    
-(Intercept)            47.3062     1.3055  36.237   <2e-16 ***
-age_group1              0.8063     1.3055   0.618   0.5377    
-condition1            -12.6438     1.3055  -9.685   <2e-16 ***
-age_group1:condition1  -2.3938     1.3055  -1.834   0.0686 .  
+(Intercept)            74.7812     1.7177  43.536  < 2e-16 ***
+age_group1              0.5937     1.7177   0.346 0.730055    
+condition1              6.4938     1.7177   3.781 0.000222 ***
+age_group1:condition1  -1.0187     1.7177  -0.593 0.553973    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 16.51 on 156 degrees of freedom
-Multiple R-squared:  0.3847,	Adjusted R-squared:  0.3729 
-F-statistic: 32.52 on 3 and 156 DF,  p-value: < 2.2e-16
+Residual standard error: 21.73 on 156 degrees of freedom
+Multiple R-squared:  0.08646,	Adjusted R-squared:  0.06889 
+F-statistic: 4.921 on 3 and 156 DF,  p-value: 0.002706
 
 
 $CI
-                           2.5 %      97.5 %
-(Intercept)            44.727609  49.8848906
-age_group1             -1.772391   3.3848906
-condition1            -15.222391 -10.0651094
-age_group1:condition1  -4.972391   0.1848906
+                          2.5 %    97.5 %
+(Intercept)           71.388355 78.174145
+age_group1            -2.799145  3.986645
+condition1             3.100855  9.886645
+age_group1:condition1 -4.411645  2.374145
 
 $d
 $d$age_group
 
 Cohen's d
 
-d estimate: 0.07714416 (negligible)
+d estimate: 0.05259156 (negligible)
 95 percent confidence interval:
      lower      upper 
--0.2352614  0.3895498 
+-0.2597519  0.3649350 
 
 
 $d$cond
 
 Cohen's d
 
-d estimate: -1.523007 (large)
+d estimate: 0.600671 (medium)
 95 percent confidence interval:
     lower     upper 
--1.877692 -1.168323 
+0.2814170 0.9199251 
 
 
 

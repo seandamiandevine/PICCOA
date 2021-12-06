@@ -5,48 +5,48 @@ lm(formula = pars ~ age_group * condition, data = nkpars)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--75.925 -17.500  -4.138  19.075  66.500 
+-69.000 -22.137   3.487  23.250  55.375 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)    
-(Intercept)             52.925      2.221  23.825   <2e-16 ***
-age_group1               3.113      2.221   1.401    0.163    
-condition1             -22.600      2.221 -10.174   <2e-16 ***
-age_group1:condition1   -2.288      2.221  -1.030    0.305    
+(Intercept)             63.269      2.328  27.172  < 2e-16 ***
+age_group1              -1.756      2.328  -0.754    0.452    
+condition1              13.431      2.328   5.768 4.18e-08 ***
+age_group1:condition1    3.456      2.328   1.484    0.140    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 28.1 on 156 degrees of freedom
-Multiple R-squared:  0.4058,	Adjusted R-squared:  0.3944 
-F-statistic: 35.51 on 3 and 156 DF,  p-value: < 2.2e-16
+Residual standard error: 29.45 on 156 degrees of freedom
+Multiple R-squared:  0.1877,	Adjusted R-squared:  0.1721 
+F-statistic: 12.01 on 3 and 156 DF,  p-value: 4.046e-07
 
 
 $CI
-                           2.5 %      97.5 %
-(Intercept)            1.6281723  2.02622851
-age_group1            -0.6733725 -0.27531629
-condition1            -0.3362034  0.06185283
-age_group1:condition1 -0.1718355  0.22622071
+                          2.5 %    97.5 %
+(Intercept)           58.669328 67.868172
+age_group1            -6.355672  2.843172
+condition1             8.831828 18.030672
+age_group1:condition1 -1.143172  8.055672
 
 $d
 $d$age_group
 
 Cohen's d
 
-d estimate: 0.1725131 (negligible)
+d estimate: -0.1083315 (negligible)
 95 percent confidence interval:
      lower      upper 
--0.1403567  0.4853829 
+-0.4208500  0.2041869 
 
 
 $d$cond
 
 Cohen's d
 
-d estimate: -1.603427 (large)
+d estimate: 0.9098188 (large)
 95 percent confidence interval:
     lower     upper 
--1.962406 -1.244447 
+0.5817704 1.2378671 
 
 
 

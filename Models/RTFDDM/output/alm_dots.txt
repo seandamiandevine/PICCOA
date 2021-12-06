@@ -5,48 +5,48 @@ lm(formula = pars ~ age_group * condition, data = apars)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--1.4342 -0.6493 -0.2436  0.1261  7.9477 
+-1.3555 -0.2700 -0.0553  0.1451  7.0064 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)    
-(Intercept)            1.82720    0.10076  18.134  < 2e-16 ***
-age_group1            -0.47434    0.10076  -4.708 5.49e-06 ***
-condition1            -0.13718    0.10076  -1.361    0.175    
-age_group1:condition1  0.02719    0.10076   0.270    0.788    
+(Intercept)            1.30536    0.03108  41.995  < 2e-16 ***
+age_group1            -0.23804    0.03108  -7.658 2.32e-13 ***
+condition1             0.05237    0.03108   1.685   0.0930 .  
+age_group1:condition1 -0.06262    0.03108  -2.014   0.0448 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 1.275 on 156 degrees of freedom
-Multiple R-squared:  0.1338,	Adjusted R-squared:  0.1171 
-F-statistic:  8.03 on 3 and 156 DF,  p-value: 5.204e-05
+Residual standard error: 0.556 on 316 degrees of freedom
+Multiple R-squared:  0.1718,	Adjusted R-squared:  0.1639 
+F-statistic: 21.85 on 3 and 316 DF,  p-value: 6.979e-13
 
 
 $CI
-                           2.5 %      97.5 %
-(Intercept)            1.6281723  2.02622851
-age_group1            -0.6733725 -0.27531629
-condition1            -0.3362034  0.06185283
-age_group1:condition1 -0.1718355  0.22622071
+                             2.5 %       97.5 %
+(Intercept)            1.244207078  1.366521347
+age_group1            -0.299194372 -0.176880102
+condition1            -0.008783948  0.113530321
+age_group1:condition1 -0.123773294 -0.001459024
 
 $d
 $d$age_group
 
 Cohen's d
 
-d estimate: -0.7445279 (medium)
+d estimate: -0.8496676 (large)
 95 percent confidence interval:
-     lower      upper 
--1.0674555 -0.4216003 
+    lower     upper 
+-1.079346 -0.619989 
 
 
 $d$cond
 
 Cohen's d
 
-d estimate: -0.2026718 (small)
+d estimate: 0.172622 (negligible)
 95 percent confidence interval:
-     lower      upper 
--0.5157620  0.1104183 
+      lower       upper 
+-0.04775508  0.39299912 
 
 
 

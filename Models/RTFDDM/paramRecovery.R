@@ -20,12 +20,11 @@ for(id in unique(dsim$id)){
   a = rgamma(1, 2, 1.5)
   ter = abs(rnorm(1, 0.2, .1))
   nk = sample(5:100, size=1)
+  m  = rgamma(1, 2, 1.5)/100
   w = .5
   N = length(stim)
   resps = c()
   RTs   = c()
-  minV  = -5
-  maxV  = 5
   
   for(t in 1:N) {
     # range normalization
@@ -46,12 +45,13 @@ for(id in unique(dsim$id)){
     }
     
     # Diffusion process
-    v   = ((stim[t]-min(stim))/(max(stim)-min(stim))) * (maxV-minV) + minV
+    v = ifelse(stim[t] < 50, stim[t]*-m, stim[t]*m)  
     pz  = (y-min(stim))/(max(stim)-min(stim))
     pz  = ifelse(pz<0.05, .05, ifelse(pz>.95, .95, pz))
     z   = a*pz
     while(1) {
       ddm = rdiffusion(1, a=a, v=v, t0=ter, z=z)
+      ddm[['rt']] = max(0, ddm[['rt']], na.rm=T)
       if(ddm[['rt']] > ter) break
     }
     
@@ -64,6 +64,7 @@ for(id in unique(dsim$id)){
                          true_a = a, 
                          true_ter = ter, 
                          true_nk = nk,
+                         true_m  = m,
                          stim=stim,
                          choices = resps,
                          RT = RTs,
@@ -160,6 +161,7 @@ for(id in unique(RFDDM$id)) {
   true_a      = sub$true_a[1]
   true_ter    = sub$true_ter[1]
   true_nk     = sub$true_nk[1]
+  true_m      = sub$true_m[1]
   choices     = sub$choices
   RT          = sub$RT
   stim        = sub$stim
@@ -180,14 +182,15 @@ for(id in unique(RFDDM$id)) {
       a0      = rgamma(1, 2, 1.5)
       ter0    = abs(rnorm(1, 0.2, .1))
       nk0     = sample(5:100, size=1)
-      x0      = c(a0, ter0, nk0)
+      m0      = rgamma(1, 2, 1.5)/100
+      x0      = c(a0, ter0, nk0, m0)
       if(obfunc(x0)<1e6) break
     }
     
     # fit
     cl = makeCluster(detectCores(), type='FORK')
-    opt = optimParallel(par=x0, fn=obfunc, lower = c(0.1,.05,5), upper = c(10,10,800), 
-                        # control = list(trace=6), 
+    opt = optimParallel(par=x0, fn=obfunc, lower = c(0.1,.05,5, 0.0001), upper = c(10,10,800, 1), 
+                        # control = list(trace=6), , 1
                         parallel = list(cl=cl, loginfo=T))
     closeAllConnections()
     
@@ -201,24 +204,51 @@ for(id in unique(RFDDM$id)) {
 
   # Grid-search for nk
   est_a   = bestFit$par[1]
-  est_ter = bestFit$par[2] 
+  est_ter = bestFit$par[2]
+  est_m   = bestFit$par[4]
   probs = c()
   grid = 5:100
   for(k in grid){
     cat('nk=',k,'||')
-    probs= c(probs, obfunc(c(est_a, est_ter, k)))
+    probs= c(probs, obfunc(c(est_a, est_ter, k, est_m)))
   }
   cat('\n')
   probs[is.na(probs)] = 1e6
-  plot(grid, probs, xlab='nk', ylab='LL', type='b') # check for convexity
+  plot(grid, probs, xlab='nk', ylab='-LL', type='b') # check for convexity
   est_nk = grid[match(min(probs), probs)]
   legend('topright', bty='n',legend=paste0('true=',true_nk,'\nest=',est_nk))
   
+  # final reestimation 
+  obfunc = function(params) {
+    LL = RTFDDM(stim, RT, choices, c(params, est_nk, est_m))
+    if(any(abs(LL)==Inf)) return(1e6)
+    -sum(LL)
+  }
+  
+  opt3 = optim(par=c(est_a, est_ter), fn=obfunc)
+  
+  est_a   = opt3$par[1]
+  est_ter = opt3$par[2]
+
+  # grid search again
+  probs = c()
+  grid = 5:100
+  for(k in grid){
+    probs= c(probs, obfunc(c(est_a, est_ter, k, est_m)))
+  }
+  probs[is.na(probs)] = 1e6
+  plot(grid, probs, xlab='nk', ylab='-LL', type='b', main='Round 2') # check for convexity
+  est_nk = grid[match(min(probs), probs)]
+  legend('topright', bty='n',legend=paste0('true=',true_nk,'\nest=',est_nk))
+  
+  LL = min(probs)
+  
   thisRecov = data.frame(id=id,
-                         true_a=true_a, true_ter=true_ter, true_nk=true_nk, 
-                         est_a = est_a, est_ter = est_ter, est_nk = est_nk, 
-                         LL = min(probs)
+                         true_a=true_a, true_ter=true_ter, true_nk=true_nk, true_m=true_m,
+                         est_a = est_a, est_ter = est_ter, est_nk = est_nk, est_m = est_m,
+                         LL = LL
                          )
+  print(thisRecov)
   Recovery = rbind(Recovery, thisRecov)
 }
 
@@ -238,6 +268,11 @@ legend('topleft', bty='n', legend=paste('r=',round(r,4)))
 # ter
 plot(Recovery$true_ter, Recovery$est_ter, xlab=expression(t0), ylab=expression(hat(t0)))
 r = cor(Recovery$true_ter, Recovery$est_ter)
+legend('topleft', bty='n', legend=paste('r=',round(r,4)))
+
+# m
+plot(Recovery$true_m, Recovery$est_m, xlab=expression(m), ylab=expression(hat(m)))
+r = cor(Recovery$true_m, Recovery$est_m)
 legend('topleft', bty='n', legend=paste('r=',round(r,4)))
 
 # nk

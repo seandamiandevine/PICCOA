@@ -4,49 +4,49 @@ Call:
 lm(formula = pars ~ age_group * condition, data = apars)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--1.9026 -1.1856 -0.7839 -0.1210 13.1631 
+     Min       1Q   Median       3Q      Max 
+-1.71753 -0.40130  0.00619  0.37291  3.04536 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)    
-(Intercept)            3.29175    0.17542  18.765   <2e-16 ***
-age_group1            -0.33704    0.17542  -1.921   0.0565 .  
-condition1             0.05645    0.17542   0.322   0.7481    
-age_group1:condition1  0.08677    0.17542   0.495   0.6215    
+(Intercept)            3.84141    0.03712 103.482  < 2e-16 ***
+age_group1            -0.10136    0.03712  -2.730  0.00668 ** 
+condition1             0.10789    0.03712   2.906  0.00392 ** 
+age_group1:condition1  0.03901    0.03712   1.051  0.29413    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 2.212 on 155 degrees of freedom
-Multiple R-squared:  0.02551,	Adjusted R-squared:  0.006653 
-F-statistic: 1.353 on 3 and 155 DF,  p-value: 0.2594
+Residual standard error: 0.6641 on 316 degrees of freedom
+Multiple R-squared:  0.05107,	Adjusted R-squared:  0.04206 
+F-statistic: 5.669 on 3 and 316 DF,  p-value: 0.000858
 
 
 $CI
-                           2.5 %      97.5 %
-(Intercept)            2.9452352 3.638260606
-age_group1            -0.6835540 0.009471324
-condition1            -0.2900675 0.402957889
-age_group1:condition1 -0.2597426 0.433282730
+                            2.5 %      97.5 %
+(Intercept)            3.76836885  3.91444205
+age_group1            -0.17439244 -0.02831924
+condition1             0.03485006  0.18092326
+age_group1:condition1 -0.03402768  0.11204553
 
 $d
 $d$age_group
 
 Cohen's d
 
-d estimate: -0.3072131 (small)
+d estimate: -0.3017046 (small)
 95 percent confidence interval:
-       lower        upper 
--0.622347197  0.007921025 
+      lower       upper 
+-0.52292032 -0.08048893 
 
 
 $d$cond
 
 Cohen's d
 
-d estimate: 0.05215051 (negligible)
+d estimate: 0.3216351 (small)
 95 percent confidence interval:
-     lower      upper 
--0.2611943  0.3654953 
+    lower     upper 
+0.1002496 0.5430205 
 
 
 

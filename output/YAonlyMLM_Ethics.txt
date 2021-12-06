@@ -1,0 +1,41 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: response ~ conditionc * trial0 * norm_mean0c + (trial0 | id)
+   Data: d.ethics[d.ethics$age_group == "YA", ]
+Control: glmerControl(optimizer = "bobyqa")
+
+     AIC      BIC   logLik deviance df.resid 
+ 13520.6  13607.1  -6749.3  13498.6    19189 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-27.2540  -0.3769  -0.1392   0.2950  10.6995 
+
+Random effects:
+ Groups Name        Variance Std.Dev. Corr 
+ id     (Intercept) 1.164    1.079         
+        trial0      5.542    2.354    -0.24
+Number of obs: 19200, groups:  id, 80
+
+Fixed effects:
+                              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                     0.9326     0.1366   6.829 8.56e-12 ***
+conditionc                     -0.1978     0.1363  -1.451   0.1468    
+trial0                          1.4234     0.3024   4.707 2.51e-06 ***
+norm_mean0c                    -7.1639     0.2385 -30.042  < 2e-16 ***
+conditionc:trial0               0.6343     0.3017   2.102   0.0356 *  
+conditionc:norm_mean0c         -0.3408     0.2326  -1.466   0.1428    
+trial0:norm_mean0c             -5.7399     0.5291 -10.849  < 2e-16 ***
+conditionc:trial0:norm_mean0c  -2.9658     0.5182  -5.724 1.04e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) cndtnc trial0 nrm_m0 cndt:0 cnd:_0 tr0:_0
+conditionc   0.023                                          
+trial0      -0.370 -0.043                                   
+norm_mean0c -0.342 -0.047  0.290                            
+cndtnc:trl0 -0.043 -0.369  0.098  0.078                     
+cndtnc:nr_0 -0.051 -0.337  0.084  0.231  0.285              
+trl0:nrm_m0  0.291  0.079 -0.396 -0.795 -0.177 -0.247       
+cndtnc:0:_0  0.084  0.286 -0.186 -0.246 -0.390 -0.791  0.446
